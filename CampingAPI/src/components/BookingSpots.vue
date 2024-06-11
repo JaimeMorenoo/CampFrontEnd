@@ -11,6 +11,7 @@
       <h2>{{ spot.name }}</h2>
       <p>{{ spot.description }}</p>
       <p><strong>Price Per Night:</strong> ${{ spot.pricePerNight }}</p>
+      <p>Stay in <strong>{{ spot.location }}!</strong></p>
       <div class="booking-form">
         <label for="check-in-date">Check-in Date:</label>
         <input type="date" v-model="checkInDate" required />
@@ -26,17 +27,17 @@
   </div>
 </template>
 
-
 <script>
-import { Swiper, SwiperSlide } from 'swiper/vue'; // Import Swiper components
-import 'swiper/swiper-bundle.css'; // Import Swiper CSS
+import { Swiper, SwiperSlide } from 'swiper/vue'; 
+import 'swiper/swiper-bundle.css'; 
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 
 export default {
   name: 'BookingSpot',
   components: {
-    Swiper, // Register Swiper component
-    SwiperSlide, // Register SwiperSlide component
+    Swiper, 
+    SwiperSlide, 
   },
   props: {
     spot: {
@@ -76,9 +77,10 @@ export default {
       return images;
     },
     async bookSpot() {
-      const userId = localStorage.getItem('userId'); // Assuming userId is stored in localStorage after login
+      const userId = localStorage.getItem('userId'); // USERID IN LOCAL STORAGE
       if (!userId) {
-        alert('User not logged in.');
+        alert('Please log in to book a spot.');
+        this.$router.push('/login'); // CHEACK IF USER IS LOGGED
         return;
       }
       try {
@@ -129,8 +131,8 @@ export default {
 
 .booking-spot img {
   width: 100%;
-  height: 200px; /* Set a fixed height for the images */
-  object-fit: cover; /* Ensure the image covers the area */
+  height: 200px; 
+  object-fit: cover; 
 }
 
 .booking-form {
@@ -164,7 +166,7 @@ export default {
   background-color: #219150;
 }
 
-/* Add styling for the parent container to center the cards */
+
 .parent-container {
   display: flex;
   flex-wrap: wrap;

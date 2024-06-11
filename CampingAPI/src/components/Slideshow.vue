@@ -12,9 +12,9 @@
   <script>
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import 'swiper/swiper-bundle.css';
-  import camp1 from '@/assets/camp1.jpg';
+  import camp3 from '@/assets/camp1.jpg';  // RANDOM PICUTRES FOR THE HOME PAGE
   import camp2 from '@/assets/camp2.jpg';
-  import camp3 from '@/assets/camp3.jpg';
+  import camp1 from '@/assets/camp3.jpg';
 
   
   export default {
@@ -60,11 +60,11 @@
 
 .swiper {
   width: 100%;
-  height: 200px; /* Altura deseada del slider */
+  height: 200px; 
 }
 
 .swiper-slide {
-  width: 0%; /* Ancho deseado de cada diapositiva */
+  width: 0%; 
   margin: 0 auto;
 }
 

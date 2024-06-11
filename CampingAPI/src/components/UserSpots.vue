@@ -25,14 +25,9 @@
       </div>
     </div>
     <div v-else>
-      <!-- Display message if the user doesn't own any spots -->
       <p>You don't own any spots!</p>
     </div>
 
-    <!-- Add Spot Button -->
-    
-
-<!-- Add Spot Modal -->
 <div v-if="showAddSpotModal" class="edit-modal">
   <div class="modal-content">
     <h2>Add Spot</h2>
@@ -59,7 +54,6 @@
   </div>
 </div>
 
-    <!-- Edit Spot Modal -->
     <div v-if="showEditModal" class="edit-modal">
       <div class="modal-content">
         <h2>Edit Spot</h2>
@@ -76,8 +70,8 @@
             <label for="pricePerNight">Price Per Night ($)</label>
             <input type="number" v-model="editedSpot.pricePerNight" required>
           </div>
-          <button type="submit">Save Changes</button>
-          <button @click="cancelEdit">Cancel</button>
+          <button class="edit-btn save-btn" type="submit">Save Changes</button>
+          <button class="edit-btn" @click="cancelEdit">Cancel</button>
         </form>
       </div>
     </div>
@@ -101,7 +95,6 @@ export default {
     };
   },
   mounted() {
-    // Fetch user spots data from the API
     this.fetchUserSpots();
   },
   methods: {
@@ -120,7 +113,7 @@ export default {
       const images = [];
       if (ownerId < 7) {
         for (let i = 1; i <= 4; i++) {
-          images.push(`/src/assets/spots/${ownerId}/${i}.jpg`);
+          images.push(`/src/assets/spots/${ownerId}/${i}.jpg`); // 7 BC WE ARE JUST "HARDCODING" THE PICTURES FOR THE DEMO
         }
       } else {
         images.push('/src/assets/spots/1/1.jpg');
@@ -128,7 +121,7 @@ export default {
   return images;
     },
     editSpot(spot) {
-      this.editedSpot = { ...spot }; // Clone the spot object
+      this.editedSpot = { ...spot }; // CLoning when editing bc of API
       this.showEditModal = true;
     },
     async saveChanges() {
@@ -141,9 +134,8 @@ export default {
           body: JSON.stringify(this.editedSpot)
         });
         if (response.ok) {
-          // Spot updated successfully
           this.showEditModal = false;
-          // Update the spots array with the updated spot
+          // Updating the spot array
           const index = this.spots.findIndex(spot => spot.id === this.editedSpot.id);
           if (index !== -1) {             this.spots[index] = { ...this.editedSpot };
           }
@@ -169,8 +161,7 @@ export default {
           }
         });
         if (response.ok) {
-          // Spot deleted successfully
-          // Remove the spot from the spots array
+          // RrEMOving the spot from the array
           this.spots = this.spots.filter(spot => spot.id !== spotId);
           console.log('Spot deleted successfully');
         } else {
@@ -236,9 +227,10 @@ export default {
 
 
 <style scoped>
-/* Your existing styles */
+
 .user-spots {
-  padding: 20px;
+  
+  
 }
 
 .spot {
@@ -249,6 +241,7 @@ export default {
   background-color: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
+  
 }
 
 .spot h3 {
@@ -266,12 +259,12 @@ export default {
 .spot-images {
   display: flex;
   overflow-x: auto;
-  scrollbar-width: none; /* Hide scrollbar for Firefox */
-  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
 
 .spot-images::-webkit-scrollbar {
-  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+  display: none; 
 }
 
 .spot-image {
@@ -286,6 +279,9 @@ export default {
   height: 100px;
   object-fit: cover;
   border-radius: 8px;
+}
+.edit-btn.save-btn {
+  margin-right: 10px; /* Add margin to the right of the "Save" button */
 }
 
 .spot-details {
@@ -323,7 +319,7 @@ export default {
 .action-btn:hover {
   background-color: #0056b3;
 }
-/* Additional styles for edit modal */
+
 .edit-modal {
   position: fixed;
   top: 0;
@@ -365,7 +361,7 @@ textarea {
 .add-spot-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px; /* Add margin-bottom to create space between button and spots */
+  margin-bottom: 20px; 
 }
 
 input[type="text"]{
@@ -384,16 +380,27 @@ input[type="number"] {
 
 button[type="submit"],
 button[type="button"] {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
   background-color: #007bff;
-  color: #fff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 button[type="submit"]:hover,
 button[type="button"]:hover {
   background-color: #0056b3;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
 }
 </style>

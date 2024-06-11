@@ -1,14 +1,14 @@
 <template>
   <header class="header">
     <div class="logo">
-      <router-link to="/">Camping App</router-link>
+      <router-link to="/">Campify</router-link>
     </div>
     <nav class="nav">
-      <router-link to="/" class="nav-link">Home</router-link>
-      <router-link to="/booking" class="nav-link">Booking</router-link>
-      <button v-if="authState.isLoggedIn" @click="goToUserProfile" class="nav-link user-button">{{ authState.username }}</button>
-      <button v-if="authState.isLoggedIn" @click="handleLogout" class="logout-button">Logout</button> <!-- This 2 will only show if logged in-->
-      <router-link v-else to="/login" class="nav-link">Login</router-link>
+      <router-link to="/" class="nav-link"><strong>Home</strong></router-link>
+      <router-link to="/booking" class="nav-link"><strong>Booking</strong></router-link>
+      <button v-if="authState.isLoggedIn" @click="goToUserProfile" class="nav-link user-button"><strong>{{ authState.username }}</strong></button>
+      <button v-if="authState.isLoggedIn" @click="handleLogout" class="logout-button"><strong>Logout</strong></button> <!-- This 2 will only show if logged in-->
+      <router-link v-else to="/login" class="nav-link"><strong>Login</strong></router-link>
     </nav>
   </header>
 </template>
@@ -41,9 +41,9 @@ const goToUserProfile = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #FC522E;
+  background-color: white; /* Electric Blue */
   padding: 1rem 2rem;
-  color: white;
+  color: black;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -54,7 +54,7 @@ const goToUserProfile = () => {
 
 .logo a {
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
 .nav {
@@ -64,21 +64,22 @@ const goToUserProfile = () => {
 
 .nav-link {
   text-decoration: none;
-  color: white;
+  color: black;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: background-color 0.3s;
 }
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: black; 
+  color: white;
 }
 
 .user-button {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: white;
+  color: black;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: background-color 0.3s;
@@ -86,14 +87,19 @@ const goToUserProfile = () => {
 }
 
 .user-button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: black; 
+  color: white;
+}
+.logout-button:hover {
+  background-color: black; 
+  color: white;
 }
 
 .logout-button {
   background-color: transparent;
   border: 5px;
   cursor: pointer;
-  color: white;
+  color: black;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: background-color 0.3s;

@@ -2,9 +2,9 @@
   <div class="user-profile">
     <div class="menu-container">
       <div class="menu">
-        <router-link :to="'/user/' + username" class="menu-item">My Profile</router-link>
-        <router-link :to="'/user/' + username + '/spots'" class="menu-item">My Spots</router-link>
-        <router-link :to="'/user/' + username + '/bookings'" class="menu-item">My Bookings</router-link>
+        <router-link :to="'/user/' + username" class="menu-item"><strong>My Profile</strong></router-link>
+        <router-link :to="'/user/' + username + '/spots'" class="menu-item"><strong>My Spots</strong></router-link>
+        <router-link :to="'/user/' + username + '/bookings'" class="menu-item"><strong>My Bookings</strong></router-link>
       </div>
     </div>
     <div class="content">
@@ -23,44 +23,46 @@ const username = route.params.username;
 .user-profile {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center horizontally */
+  align-items: center; 
   align-content: center;
+  background-color: #001f3f;
 }
 
 .menu-container {
-  margin-top: 20px; /* Adjust spacing */
+  margin-top: 20px; 
 }
 
 .menu {
   display: flex;
-  flex-direction: row; /* Display menu items side by side */
-  width: 115%; /* Expand to fill available space */
-  max-width: 650px; /* Limit maximum width */
-  background-color: #f0f0f0;
+  position: relative;
+  flex-direction: row; 
+  width: 125%;
+  max-width: 650px; 
+  background-color: #001f3f;
   padding: 20px;
-  border-radius: 100px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  right: 15%;;
+  
 }
 
 .menu-item {
-  flex: 1; /* Distribute space evenly */
-  text-align: center; /* Center text horizontally */
-  text-decoration: none;
-  color: #333;
-  margin: 0 10px; /* Adjust spacing between items */
-  transition: color 0.3s;
+  flex: 1;
+  text-align: center; 
+  color: white;
+  margin: 0 20px; 
 }
 
 .menu-item:last-child {
-  margin-right: 0; /* Remove margin from the last item */
+  margin-right: 0; 
 }
 
 .menu-item:hover {
-  color: #555;
+  background-color: white; 
+  color: black;
+  border-radius: 100px;
 }
 
 .content {
   flex: 1;
-  padding: 20px;
+  padding: 50px;
 }
 </style>

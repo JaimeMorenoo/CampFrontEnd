@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <p>&copy; 2024 Camping App. All rights reserved.</p>
+    <p>&copy; Design by Jaime Moreno</p>
   </footer>
 </template>
 

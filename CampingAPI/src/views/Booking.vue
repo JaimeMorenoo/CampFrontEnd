@@ -1,9 +1,10 @@
 <template>
   <div class="booking">
-    <h1>Book a Camping Spot</h1>
+    <h1>Book a Camping Spot !</h1>
+    <filter-component @apply-filters="filterSpots" />
     <div class="booking-spots">
       <booking-spot
-        v-for="(spot, index) in bookingSpots"
+        v-for="(spot, index) in filteredSpots"
         :key="index"
         :spot="spot"
         class="booking-spot"
@@ -12,19 +13,21 @@
   </div>
 </template>
 
-
 <script>
 import axios from 'axios';
-import BookingSpot from '@/components/BookingSpots.vue'; // Import BookingSpot component
+import BookingSpot from '@/components/BookingSpots.vue'; 
+import FilterComponent from '@/components/FilterComponent.vue'; 
 
 export default {
   name: 'Booking',
   components: {
-    BookingSpot, // Register BookingSpot component
+    BookingSpot,
+    FilterComponent,
   },
   data() {
     return {
       bookingSpots: [],
+      filteredSpots: [],
     };
   },
   mounted() {
@@ -35,9 +38,18 @@ export default {
       try {
         const response = await axios.get('https://localhost:7044/CampingSpot');
         this.bookingSpots = response.data;
+        this.filteredSpots = this.bookingSpots;
       } catch (error) {
         console.error('Error fetching booking spots:', error);
       }
+    },
+    filterSpots(filters) {
+      this.filteredSpots = this.bookingSpots.filter((spot) => {
+        return (
+          (!filters.maxPrice || spot.pricePerNight <= filters.maxPrice) &&
+          (!filters.location || spot.location.toLowerCase().includes(filters.location.toLowerCase()))
+        );
+      });
     },
   },
 };
@@ -47,13 +59,18 @@ export default {
 .booking {
   text-align: center;
   padding: 20px;
-  background-color: #f4f4f9;
+  background-color: #001f3f;
+  color: black
+  
+}
+html body{
+  background-color: #001f3f;
 }
 
 h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #333;
+  color: white;
 }
 
 .booking-spots {

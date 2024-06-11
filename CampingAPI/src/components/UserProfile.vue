@@ -1,4 +1,7 @@
 <template>
+  <div class="test">
+
+ 
   <div class="user-profile">
     <div class="card" v-if="user">
       <div class="header">
@@ -6,58 +9,46 @@
       </div>
       <div class="details">
         <h2>{{ user.username }}</h2>
-        <p>{{ user.city }}, {{ user.state }}</p>
         <button class="edit-btn" @click="isEditing = true">Edit</button>
       </div>
       <div v-if="!isEditing" class="info">
         <p><span class="label">First Name:</span> <span class="value">{{ user.name }}</span></p>
         <p><span class="label">Last Name:</span> <span class="value">{{ user.lastName }}</span></p>
-        <p><span class="label">DOB:</span> <span class="value">{{ user.dob }}</span></p>
-        <p><span class="label">Country:</span> <span class="value">{{ user.country }}</span></p>
-        <p><span class="label">Phone:</span> <span class="value">{{ user.phone }}</span></p>
+        <p><span class="label">DOB:</span> <span class="value">{{ formatDate(user.dob) }}</span></p>
+        
       </div>
       <div v-else class="info">
         <p>
           <span class="label">First Name:</span> 
-          <input v-model="editableUser.name" />
+          <input type='text' v-model="editableUser.name" />
         </p>
         <p>
           <span class="label">Last Name:</span> 
-          <input v-model="editableUser.lastName" />
+          <input type='text' v-model="editableUser.lastName" />
         </p>
         <p>
           <span class="label">DOB:</span> 
           <input v-model="editableUser.dob" type="date" />
         </p>
         <p>
-          <span class="label">Country:</span> 
-          <input v-model="editableUser.country" />
+          <span class="label">Password:</span> 
+          <input type='password' v-model="editableUser.password" placeholder="Place new password" />
         </p>
-        <p>
-          <span class="label">Phone:</span> 
-          <input v-model="editableUser.phone" />
-        </p>
-        <button @click="saveChanges">Save</button>
-        <button @click="isEditing = false">Cancel</button>
+        <button class="edit-btn save-btn" @click="saveChanges">Save</button>
+        <button class="edit-btn" @click="isEditing = false">Cancel</button>
       </div>
       <div class="rating">
         <div class="rating-bar">
           <span class="rating-label">Your Rating</span>
           <span class="activity-label"></span>
-          <div class="bar">
-            <div class="activity-progress" :style="{ width: user.activity + '%' }"></div>
-          </div>
-        </div>
-        <div class="rating-values">
-          <span>{{ user.activity }}%</span>
-        </div>
       </div>
     </div>
+    </div>
+  </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'UserProfile',
   data() {
@@ -65,7 +56,7 @@ export default {
       user: null,
       editableUser: {},
       isEditing: false,
-      avatarUrl: 'https://img.freepik.com/premium-photo/cristiano-ronaldo-cartoon-logo-6_639744-1846.jpg' // Placeholder image URL
+      avatarUrl: 'https://as1.ftcdn.net/v2/jpg/05/24/80/40/1000_F_524804077_gOLGMjqfvR5sB6E4cLif4mbiQU0jL1rw.jpg' // SIUUUU
     };
   },
   mounted() {
@@ -73,8 +64,7 @@ export default {
   },
   methods: {
     async fetchUserData() {
-      const userId = localStorage.getItem('userId'); // Get userId from local storage
-      console.log(userId)
+      const userId = localStorage.getItem('userId'); 
       if (!userId) {
         console.error('No user ID found in local storage');
         return;
@@ -83,9 +73,8 @@ export default {
         const response = await fetch(`https://localhost:7044/User/${userId}`);
         const userData = await response.json();
         this.user = userData.value;
-        this.user.rating = 53; // Hardcoded for example, replace with actual data
-        this.user.activity = 90; // Hardcoded for example, replace with actual data
-        this.editableUser = { ...this.user }; // Clone the user data for editing
+        this.user.activity = 90; // RANDOM NOT ACTUAL VALUE
+        this.editableUser = { ...this.user }; // CLONING THE USER DATA FOR EDITING BC OF API THAT HAS RANDOM VALUES
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -108,28 +97,47 @@ export default {
       } catch (error) {
         console.error('Error updating user data:', error);
       }
+    },
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      // Format the date as you wish
+      const formattedDate = date.toLocaleDateString(); // Change the formatting as needed
+      return formattedDate;
     }
   }
 };
 </script>
 
+
 <style scoped>
-/* Add your CSS styles here */
+
 .user-profile {
   display: flex;
   justify-content: center;
-  padding: 20px;
+  padding: 20px; 
+   
 }
 
+.test {
+  background-color: #001f3f;
+  width: 100vw;
+  height: 100vh;
+}
+
+
 .card {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color:  white;
+  border-radius: 5px;
   overflow: hidden;
   width: 400px;
   padding: 20px;
   text-align: center;
   position: relative;
+  left: 10px;
+  color: black;
+  border: 1px solid black; 
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .header {
@@ -137,6 +145,7 @@ export default {
   justify-content: center;
   align-items: center;
   position: relative;
+  
 }
 
 .avatar {
@@ -158,7 +167,7 @@ export default {
 
 .details p {
   margin: 5px 0;
-  color: #555;
+  color: black;
 }
 
 .edit-btn {
@@ -168,21 +177,26 @@ export default {
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 30px;
 }
+.card:hover{
+  transform: scale(1.05);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
 
+
+}
 .edit-btn:hover {
   background-color: #0056b3;
 }
 
 .info {
   margin-top: 20px;
-  text-align: left;
+  text-align: center
 }
 
 .info p {
   margin: 5px 0;
-  color: #555;
+  color: black;
 }
 
 .info .label {
@@ -198,6 +212,10 @@ export default {
   text-align: center;
 }
 
+.edit-btn.save-btn {
+  margin-right: 20px; 
+}
+
 .rating-bar {
   display: flex;
   justify-content: space-between;
@@ -206,7 +224,7 @@ export default {
 
 .rating-label, .activity-label {
   font-size: 0.9rem;
-  color: #777;
+  color: white;
 }
 
 .bar {
@@ -218,14 +236,6 @@ export default {
   position: relative;
 }
 
-.rating-progress {
-  background-color: #ffcc00;
-  height: 100%;
-  border-radius: 5px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
 
 .activity-progress {
   background-color: #00cc66;
@@ -235,12 +245,22 @@ export default {
   top: 0;
   left: 0;
   opacity: 0.5;
+  text-align: center;
 }
 
 .rating-values {
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
-  color: #333;
+  color: white;
+}
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="email"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 </style>

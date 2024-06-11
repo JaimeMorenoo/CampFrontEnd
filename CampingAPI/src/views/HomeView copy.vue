@@ -62,7 +62,7 @@ export default {
 }
 
 .btn-primary {
-  background-color: #0074D9; 
+  background-color: #0074D9; /* Electric Blue */
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 4px;
@@ -72,7 +72,7 @@ export default {
 }
 
 .btn-primary:hover {
-  background-color: white; 
+  background-color: white; /* Dark Blue */
   color: black;
 }
 
@@ -86,7 +86,7 @@ export default {
 .feature {
   flex: 1;
   margin: 1rem;
-  background: #0074D9; 
+  background: #0074D9; /* Electric Blue Background */
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

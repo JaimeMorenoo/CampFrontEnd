@@ -1,7 +1,7 @@
 <template>
   
   <div class="user-bookings">
-    <h2>My Bookings</h2>
+    <h2 style="color: white;">My Bookings</h2>
     <div v-if="bookings.length" class="bookings-list">
       <div v-for="booking in bookings" :key="booking.id" class="booking-card">
         <img :src="getSpotImage(booking.campingSpotId)" alt="Spot Image" class="spot-image" />
@@ -27,12 +27,12 @@ export default {
     };
   },
   mounted() {
-    // Fetch user bookings data from the API
+    
     this.fetchUserBookings();
   },
   methods: {
     async fetchUserBookings() {
-      const userId = localStorage.getItem('userId'); // Assuming userId is stored in localStorage after login
+      const userId = localStorage.getItem('userId'); // WE STROE ONCE LOGGED IN THE USERID!!!
       if (!userId) {
         alert('User not logged in.');
         return;
@@ -52,7 +52,8 @@ export default {
       const checkIn = new Date(checkInDate);
       const checkOut = new Date(checkOutDate);
       const days = (checkOut - checkIn) / (1000 * 60 * 60 * 24);
-      return days > 0 ? days * pricePerNight : 0;
+      const totalCost = days > 0 ? days * pricePerNight : 0;
+      return totalCost.toFixed(2);
     },
     formatDate(date) {
       return new Date(date).toLocaleDateString();
@@ -66,7 +67,7 @@ export default {
       } else {
         images.push('/src/assets/spots/1/1.jpg');
       }
-      return images[0]; // Return the first image
+      return images[0]; 
     }
   }
 };
@@ -81,28 +82,31 @@ export default {
 
 }
 
+
 .bookings-list {
   padding: 30px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center; /* Center the cards horizontally */
+  justify-content: center; 
+  
 }
 
 .booking-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 1px solid black;
+  border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 300px; /* Set a fixed width for the cards */
+  width: 300px; 
+  background-color: white;
 }
 
 .spot-image {
   width: 100%;
-  height: 200px; /* Set a fixed height for the images */
-  object-fit: cover; /* Ensure the image covers the area */
+  height: 200px;
+  object-fit: cover; 
 }
 
 .booking-details {
@@ -112,6 +116,7 @@ export default {
 .booking-details h3 {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
+
 }
 
 .booking-details p {
