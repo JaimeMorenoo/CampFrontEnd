@@ -1,7 +1,7 @@
 <template>
   
   <div class="user-bookings">
-    <h2 style="color: white;">My Bookings</h2>
+    <h2 style="color: black;">My Bookings</h2>
     <div v-if="bookings.length" class="bookings-list">
       <div v-for="booking in bookings" :key="booking.id" class="booking-card">
         <img :src="getSpotImage(booking.campingSpotId)" alt="Spot Image" class="spot-image" />
@@ -74,7 +74,8 @@ export default {
 </script>
 <style scoped>
 .user-bookings {
-  padding: 30px;
+  padding: 0px;
+  padding-right: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,12 +96,17 @@ export default {
 .booking-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 300px; 
-  background-color: white;
+  color: black;
+}
+
+.booking-card:hover{
+  transform: scale(1.05);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
 }
 
 .spot-image {

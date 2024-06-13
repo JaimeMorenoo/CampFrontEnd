@@ -1,20 +1,17 @@
 <template>
   <div class="user-spots">
-    <div class="add-spot-container"> <!-- Added a container for the button -->
+    <div class="add-spot-container"> 
       <button @click="openAddSpotModal" class="action-btn">Add Spot</button>
     </div>
     <div v-if="spots.length > 0">
-      <!-- Display spots if the user owns any -->
       <div v-for="spot in spots" :key="spot.id" class="spot">
         <h3>{{ spot.name }}</h3>
         <p>{{ spot.description }}</p>
         <div class="spot-images">
-          <!-- Display spot images using the getSpotImage method -->
           <div v-for="(image, index) in getSpotImage(spot.id)" :key="index" class="spot-image">
             <img :src="image" alt="Spot Image">
           </div>
         </div>
-        <!-- Add more details about the spot as needed -->
         <div class="spot-details">
           <p><strong>Price Per Night:</strong> ${{ spot.pricePerNight }}</p>
           <div class="actions">
@@ -230,18 +227,21 @@ export default {
 
 .user-spots {
   
-  
+  color: black;
 }
 
 .spot {
-  border: 1px solid #e0e0e0;
+  border: 2px solid black;
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
-  background-color: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
   
+}
+.spot:hover{
+  transform: scale(1.05);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
 }
 
 .spot h3 {
@@ -252,7 +252,7 @@ export default {
 
 .spot p {
   margin-bottom: 15px;
-  color: #555;
+  color: black;
   font-size: 16px;
 }
 
@@ -311,7 +311,7 @@ export default {
   padding: 8px 12px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: black;
   color: #fff;
   cursor: pointer;
 }

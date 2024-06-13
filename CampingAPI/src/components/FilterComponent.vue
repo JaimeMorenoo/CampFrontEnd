@@ -38,10 +38,9 @@ export default {
   gap: 1rem;
   margin-bottom: 2rem;
   padding: 1rem;
-  border: 1px solid white;
+  border: 1px solid #001f3f;
   border-radius: 8px;
   background-color: #001f3f;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   max-width: 600px;
   margin: 0 auto;
 }
@@ -69,11 +68,11 @@ export default {
   border-radius: 4px;
   font-size: 1rem;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease; /* Add transition effect */
+  transition: transform 0.3s ease;
 }
 
 .filter-item:hover {
-  transform: scale(1.05); /* Apply scale effect on hover */
+  transform: scale(1.05);
 }
 
 .filter-item input:focus {

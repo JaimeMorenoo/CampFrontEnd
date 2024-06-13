@@ -37,12 +37,6 @@
         <button class="edit-btn save-btn" @click="saveChanges">Save</button>
         <button class="edit-btn" @click="isEditing = false">Cancel</button>
       </div>
-      <div class="rating">
-        <div class="rating-bar">
-          <span class="rating-label">Your Rating</span>
-          <span class="activity-label"></span>
-      </div>
-    </div>
     </div>
   </div>
   </div>
@@ -119,14 +113,12 @@ export default {
 }
 
 .test {
-  background-color: #001f3f;
   width: 100vw;
   height: 100vh;
 }
 
 
 .card {
-  background-color:  white;
   border-radius: 5px;
   overflow: hidden;
   width: 400px;
@@ -171,7 +163,7 @@ export default {
 }
 
 .edit-btn {
-  background-color: #007bff;
+  background-color: black;
   color: white;
   border: none;
   padding: 5px 10px;

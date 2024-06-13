@@ -106,7 +106,7 @@ export default {
 .booking-spot {
   display: flex;
   flex-direction: column;
-  border: 1px solid #ccc;
+  border: 1px solid black;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -114,6 +114,7 @@ export default {
   width: 100%;
   max-width: 300px;
 }
+
 
 .spot-details {
   padding: 1rem;
